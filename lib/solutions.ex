@@ -27,15 +27,16 @@ defmodule Solutions do
   """
   def get_two_sum_index(integers_list, target) do
 
-    for x <- integers_list, y <- integers_list, x != y do
+    result = for x <- integers_list, y <- integers_list, x != y and x + y == target do
+      x_index = Enum.find_index(integers_list, fn item -> item == x end)
+      y_index = Enum.find_index(integers_list, fn item -> item == y end)
 
-      if x + y == target do
-        x_index = Enum.find_index(integers_list, fn item -> item == x end)
-        y_index = Enum.find_index(integers_list, fn item -> item == y end)
-        [x_index, y_index]
-      end
+      [x_index, y_index]
 
     end
+
+    result = Enum.take(result, 1)
+    List.flatten(result)
 
   end
 end
